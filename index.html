@@ -24,7 +24,7 @@
 
             // Select and copy the text
             textarea.select();
-            document.execCommand("copy");
+            await navigator.clipboard.writeText(message);
 
             // Remove the textarea
             document.body.removeChild(textarea);

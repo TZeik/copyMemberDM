@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Copiar al Portapapeles</title>
+    <script>
+        function copiarTexto() {
+            const mensaje = "**__Ficha de Reclutamiento__**
+> `-` **Nombre IG:**
+> `-` **Objetivo:**
+> `-` **Rol principal:**";
+            navigator.clipboard.writeText(mensaje).then(() => {
+                alert("Texto copiado al portapapeles!");
+            }).catch(err => {
+                console.error("Error al copiar el texto: ", err);
+            });
+        }
+        window.onload = copiarTexto;
+    </script>
+</head>
+<body>
+    <h1>Copiando texto al portapapeles...</h1>
+</body>
+</html>

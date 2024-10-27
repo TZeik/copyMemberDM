@@ -11,12 +11,12 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
+            try{
             // Message to copy
             const message = "**__Ficha de Reclutamiento__**
 > `-` **Nombre IG:**
 > `-` **Objetivo:**
 > `-` **Rol principal:**";
-
             // Create a temporary textarea element to hold the message
             const textarea = document.createElement("textarea");
             textarea.value = message;
@@ -34,6 +34,10 @@
 
             // Attempt to close the page
             window.close();
+            } catch (err) {
+                console.error("Failed to copy to clipboard:", err);
+                alert("Failed to copy to clipboard.");
+            }
         });
     </script>
 </body>

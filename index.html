@@ -3,41 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Copy to Clipboard on Page Load</title>
+    <title>Copy to Clipboard Example</title>
 </head>
 <body>
     <h1>Clipboard Copy Example</h1>
-    <p>On page load, a message will be copied to your clipboard automatically.</p>
+    <p>The message will be copied to your clipboard when you click the button.</p>
+    <button id="copyButton">Copy Message to Clipboard</button>
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            try{
-            // Message to copy
             const message = "**__Ficha de Reclutamiento__**
 > `-` **Nombre IG:**
 > `-` **Objetivo:**
 > `-` **Rol principal:**";
-            // Create a temporary textarea element to hold the message
-            const textarea = document.createElement("textarea");
-            textarea.value = message;
-            document.body.appendChild(textarea);
+            const copyButton = document.getElementById("copyButton");
 
-            // Select and copy the text
-            textarea.select();
-            await navigator.clipboard.writeText(message);
+            async function copyToClipboard() {
+                try {
+                    await navigator.clipboard.writeText(message);
+                    alert("Message copied to clipboard!");
+                    window.close();
+                } catch (err) {
+                    console.error("Failed to copy to clipboard:", err);
 
-            // Remove the textarea
-            document.body.removeChild(textarea);
+                    // Fallback if clipboard access fails
+                    const fallbackTextarea = document.createElement("textarea");
+                    fallbackTextarea.value = message;
+                    document.body.appendChild(fallbackTextarea);
+                    fallbackTextarea.select();
+                    document.execCommand("copy");
+                    document.body.removeChild(fallbackTextarea);
+                    alert("Message copied using fallback method!");
 
-            // Optional: alert to confirm
-            alert("Message copied to clipboard!");
-
-            // Attempt to close the page
-            window.close();
-            } catch (err) {
-                console.error("Failed to copy to clipboard:", err);
-                alert("Failed to copy to clipboard.");
+                    // Attempt to close the page
+                    window.close();
+                }
             }
+
+            // Add click event to the button
+            copyButton.addEventListener("click", copyToClipboard);
         });
     </script>
 </body>
